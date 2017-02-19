@@ -1,0 +1,1 @@
+[18-Feb-2017 18:50:57 UTC] PHP Fatal error:  Class 'App\Http\Controllers\DB\Controller' not found in /home/ubuntu/workspace/Calculadora-de-IMC/app/Http/Controllers/ImcController.php on line 8
