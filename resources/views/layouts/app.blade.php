@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Calculadora de IMC</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -35,8 +35,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a style="color:white" class="navbar-brand" href="{{ url('/') }}">
+                        Calculadora De IMC
                     </a>
                 </div>
 
@@ -50,17 +50,19 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}">Iniciar Session</a></li>
+                            <li><a href="{{ route('register') }}">Registrarse</a></li>
                         @else
+                         <li><a href="/imcs">Historia</a></li>
+                        <li><a href="/check-imc">Calcular ahora</a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Hola, 
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="/logout"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
@@ -72,6 +74,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a href="/logout">Cerrar Session</a></li>
                         @endif
                     </ul>
                 </div>
@@ -82,8 +85,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
-    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    @include ('footer')
+   
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
+  
+    <script src="/js/app.js"></script>
 </body>
 </html>

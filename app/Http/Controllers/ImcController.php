@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Imc;
 use Illuminate\Support\Facades\Auth;
+use JavaScript;
 
 use Illuminate\Http\Request;
 
@@ -25,6 +26,20 @@ class ImcController extends Controller
     
     public function check()
     {
+        $all = Imc::where('user_id', Auth::id())->get();
+         $last = collect($all)->last();
+         
+         if ($last) {
+        
+        JavaScript::put([
+            
+         'clasificacion' => $last->clasificacion,
+         'imc' => $last->imccalculado,
+        
+        ]);
+        
+         }
+        
         $imc = Imc::all();
         return view('imc.check-imc', compact('imc'));
     }
@@ -72,9 +87,26 @@ class ImcController extends Controller
         
         $imc->user_id = Auth::id();
         
+        // $all = Imc::where('user_id', Auth::id())->get();
+        //  $last = collect($all)->last();
+        
+        // JavaScript::put([
+            
+        //  'clasificacion' => $last->clasificacion,
+        //  'imc' => $last->imccalculado,
+        
+        // ]);
+
         $imc->save();
         
-        return redirect('/imcs');
+       return redirect('/imcs');
         
+    }
+    
+    public function result()
+    {
+         $all = Imc::where('user_id', Auth::id())->get();
+         $last = collect($all)->last();
+         return $last;
     }
 }

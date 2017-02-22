@@ -25,5 +25,10 @@ Route::get('imcs/{imc}', 'ImcController@show');
 
 Route::get('check-imc', 'ImcController@check')->middleware('auth');
 
-Route::post('store', 'ImcController@store')->middleware('auth');
+//Route::post('store', 'ImcController@store')->middleware('auth');
 
+Route::post('check-imc', 'ImcController@store')->middleware('auth');
+
+Route::get('imc-result', 'ImcController@result');
+
+Route::get('/logout', 'Auth\LoginController@logout');
